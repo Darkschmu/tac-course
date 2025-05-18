@@ -17,9 +17,9 @@ resource "aws_instance" "count_lab" {
   # add your count meta-argument here!
   ami           = "ami-0c7c4e3c6b4941f0f"
   instance_type = "t2.micro"
-    
+  count         = 2
   tags = {
     # Modify the Name tag so that it uses the count_index argument!
-    Name = "Count-Lab"
+    Name = "Count-Lab-${count.index + 1}"
   }
 }

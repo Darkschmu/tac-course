@@ -1,0 +1,47 @@
+terraform init  # download provider(s)
+    "   fmt # check syntax
+    "   validate # check functionality of files
+    "   plan (-out file) #dry run (save output)
+    "   apply # run
+    "   destroy
+    "   state list (parse statefile for resources)
+    "   show (basically cats statefile, translates json to hcl)
+    "   state show X (X being from `state list` output, displays output for that resource)
+    "   plan -destroy (plans the destruction)
+
+ssh -i ..\keys\aws_key admin@$(terraform output -raw public_ip) # pulls public_ip specified in outputs.tf from state file
+
+reset working dir:
+rm -fr .terraform
+rm terraform.tfstate(.backup)
+rm .terraform.lock.hcl
+
+statefile = json format
+
+replacing individual resource?
+- make change in main.tf
+- terraform apply -replace {resource_to_replace}
+
+
+Initialize the local git repo:
+git init
+
+Add the content in the directory:
+git add .
+
+Note: Remember, this should not include the provider plugin because we added that to the .gitignore file.
+
+Commit the content in the directory:
+git commit -m "commit 1"
+
+Change the branch name:
+git branch -M main
+
+Connect to the remote repo:
+git remote add origin https://github.com/<yourname>/<repo-name>.git
+
+Push the content to Github:
+git push -u origin main
+
+TAC lesson 11 had me trigger terraform Cloud runs via Github push. Wouldnt work till I specified the branch (main) since 'default' wasnt triggering anything...
+but ti still didnt work on push, so im missing something, and I dont care enough to fine out what =p
